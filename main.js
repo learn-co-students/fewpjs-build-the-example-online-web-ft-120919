@@ -2,8 +2,51 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('li.like span').forEach(elem => addEventListener('click', handleClick))
+})
 
+
+// element => console.log(element)
+function hideError() {
+  errorId = document.querySelector('#modal')
+  errorId.classList.add('hidden')
+}
+
+function showError() {
+  errorId = document.querySelector('#modal')
+  errorId.classList.remove('hidden')
+}
+
+function showFullHeart(li) {
+  li.textContent = FULL_HEART
+  li.classList.add('activated-heart')
+}
+
+function clearHeart(li) {
+  li.textContent = EMPTY_HEART
+  li.classList.remove('activated-heart')
+}
+
+function handleClick(e) {
+  // alert('Clicked!')
+  mimicServerCall()
+  .then(response => {
+    hideError()
+    console.log(e.target)
+    if (e.target.textContent === EMPTY_HEART) {
+      showFullHeart(e.target)
+    } else {
+      clearHeart(e.target)
+    }
+    // console.log(e)
+
+  })
+  .catch((error) => {
+    showError()
+  })
+
+}
 
 
 
