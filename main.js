@@ -4,6 +4,26 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const errorDiv = document.querySelector('div#modal')
+errorDiv.className = 'hidden'
+const heart = document.querySelector('li.like span')
+heart.addEventListener('click', () => {
+  mimicServerCall()
+  .then(() => {
+    if (heart.className == 'like-glyph') {
+      heart.className = 'activated-heart'
+      heart.textContent = FULL_HEART
+    } else {
+      heart.className = 'like-glyph'
+      heart.textContent = EMPTY_HEART
+    }
+  })
+  .catch(function(error) {
+    errorDiv.className = ''
+    errorDiv.lastChild.textContent = error.message
+    setTimeout(() => {errorDiv.className = 'hidden'}, 5000)
+  })
+})
 
 
 
