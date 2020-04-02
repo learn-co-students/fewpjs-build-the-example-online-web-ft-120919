@@ -8,17 +8,12 @@ let colorStates = {
   "": "red"
 };
 
-// STEP 1: This code is what lets JavaScript find the elements that we want to make clickable.
-// Without JavaScript, clicking on these heart shapes does nothing. Uncomment
-// this code and refresh the demo page.
-
 let articleHearts = document.querySelectorAll(".like-glyph");
 
 function likeCallback(e) {
   let heart = e.target;
   mimicServerCall()
-    .then(function (serverMessage) {
-
+    .then(function () {
       heart.innerText = glyphStates[heart.innerText];
       heart.style.color = colorStates[heart.style.color];
     })
