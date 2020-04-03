@@ -6,13 +6,20 @@ const FULL_HEART = '♥'
 document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById("modal")
   const modalMessage = document.getElementById("modal-message")
-  const like = document.querySelector(".like-glyph")
+  const likes = document.querySelectorAll(".like-glyph")
 
-  like.addEventListener('click', function (e) {
-    console.log("clicked")
+  likes.forEach(like => {
+    like.addEventListener('click', clickHeart)
+  })
+
+  function clickHeart(e) {
+    let likedPost = e.target
     mimicServerCall()
-      .then(response => response.json())
-      .then(json => changeHeart(json))
+      .then(response => {
+        if (response == "Pretend remote server notified of action!") {
+          changeHeart(likedPost)
+        }
+      })
       .catch(error => {
         modalMessage.innerText = error
         modal.className = ""
@@ -21,12 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
           modal.className = "hidden"
         }, 5000)
       })
-  })
+  }
 
 })
 
-function changeHeart(json) {
-  debugger
+function changeHeart(like) {
   if (like.innerHTML == EMPTY_HEART) {
     like.innerHTML = FULL_HEART
     like.className = "activated-heart"
