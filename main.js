@@ -15,21 +15,15 @@ function init(){
     (post)=>{
       let likeBttn = post.getElementsByClassName("like")[0];
       likeBttn.setAttribute("id",post.id);
-
+      likeBttn.addEventListener("click", changeHeart);
     }
-)
-  /*
-  element.getAttribute()
-  element.setAttribute()
-  for id getting & setting
- */
-
-  let heart = document.getElementById("heart");
-      heart.addEventListener("click", likeCount);
-
-
+  )
 }
 
+
+function changeHeart(event){
+  let likeBttn = event.likeBttn;
+}
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
