@@ -1,6 +1,6 @@
 // Defining text characters for the empty and full hearts for you to use later.
-const EMPTY_HEART = '♡'
-const FULL_HEART = '♥'
+const EMPTY_HEART = '♡';
+const FULL_HEART = '♥';
 
 // Your JavaScript code goes here!
 
@@ -23,6 +23,12 @@ function init(){
 
 function changeHeart(event){
   let likeBttn = event.likeBttn;
+  let likeGlyph= likeBttn.getElementsByClassName("like-glyph")[0];
+  if (likeGlyph.innerText==EMPTY_HEART){
+    likeGlyph.innerText= FULL_HEART;
+  } else {
+    likeGlyph.innerText= EMPTY_HEART;
+  }
 }
 
 //------------------------------------------------------------------------------
