@@ -4,7 +4,26 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+document.addEventListener("DOMContentLoaded", init);
 
+function init(){
+
+
+  // attach ds to the likes & then attach action listeners
+  let posts = document.getElementsByClassName("media-post");
+
+  /*
+  element.getAttribute()
+  element.setAttribute()
+  for id getting & setting
+ */
+
+  let heart = document.getElementById("heart");
+      heart.addEventListener("click", likeCount);
+  let pause = document.getElementById("pause");
+      pause.addEventListener("click", pauseCounter);
+
+}
 
 
 //------------------------------------------------------------------------------
