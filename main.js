@@ -11,7 +11,13 @@ function init(){
 
   // attach ds to the likes & then attach action listeners
   let posts = document.getElementsByClassName("media-post");
+  posts.forEach(
+    (post)=>{
+      let likeBttn = post.getElementsByClassName("like")[0];
+      likeBttn.setAttribute("id",post.id);
 
+    }
+)
   /*
   element.getAttribute()
   element.setAttribute()
@@ -20,8 +26,7 @@ function init(){
 
   let heart = document.getElementById("heart");
       heart.addEventListener("click", likeCount);
-  let pause = document.getElementById("pause");
-      pause.addEventListener("click", pauseCounter);
+
 
 }
 
