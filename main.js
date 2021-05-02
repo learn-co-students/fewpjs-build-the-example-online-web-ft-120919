@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", init);
 function init(){
 
 
-  // attach ds to the likes & then attach action listeners
+  // attach ids to the likes & then attach action listeners
   let posts = document.getElementsByClassName("media-post");
   posts.forEach(
     (post)=>{
@@ -20,13 +20,55 @@ function init(){
   )
 }
 
-
+/*
+  <footer>
+        <ul>
+          <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
+        </ul>
+      </footer>
+ */
 function changeHeart(event){
   let likeBttn = event.likeBttn;
   let likeGlyph= likeBttn.getElementsByClassName("like-glyph")[0];
+  /**
+      When a user clicks on an empty heart:
+        Invoke mimicServerCall to simulate making a server request
+        When the "server" returns a success status:
+            Change the heart to a full heart
+            Add the .activated-heart class to make the heart appear red
+   */  
   if (likeGlyph.innerText==EMPTY_HEART){
+    let responseAsPromise = mimicServerCall();
+    responseAsPromise.then(
+      (fulfilled, rejected)=> {
+
+      }
+    ).catch(
+      (rejected)=> {
+     /**        
+       When the "server" returns a failure status:
+              Respond to the error using a .catch(() => {}) block after your .then(() => {}) block.
+              Display the error modal by removing the .hidden class
+              Display the server error message in the modal
+              Use setTimeout to hide the modal after 3 seconds (add the .hidden class) */
+            let errorModal = document.getElementById("modal");
+            errorModal.removeAttribute("class");
+            let errorModalMessage = document.getElementById("modal-message");
+            errorModalMessage.innerText=rejected;
+
+            setTimeout(() => {
+              errorModal.setAttribute("class", "hidden");
+            }, 300)
+      }
+    )
     likeGlyph.innerText= FULL_HEART;
   } else {
+      /**
+        When a user clicks on a full heart:
+          Change the heart back to an empty heart
+          Remove the .activated-heart class
+   */
+
     likeGlyph.innerText= EMPTY_HEART;
   }
 }
