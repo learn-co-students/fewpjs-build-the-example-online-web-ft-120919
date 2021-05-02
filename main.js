@@ -53,7 +53,7 @@ function changeHeart(event){
 
             setTimeout(() => {
               errorModal.setAttribute("class", "hidden");
-            }, 300);
+            }, 3000);
       }
     )
   } else {
@@ -76,7 +76,7 @@ function changeHeart(event){
 function mimicServerCall(url="http://mimicServer.example.com", config={}) {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
-      let isRandomFailure = Math.random() < .2
+      let isRandomFailure = Math.random() < .2;
       if (isRandomFailure) {
         reject("Random server error. Try again.");
       } else {
