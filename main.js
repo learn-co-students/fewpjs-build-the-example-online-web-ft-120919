@@ -13,23 +13,19 @@ function init(){
   let posts = document.getElementsByClassName("media-post");
   posts.forEach(
     (post)=>{
-      let likeBttn = post.getElementsByClassName("like")[0];
-      likeBttn.setAttribute("id",post.id);
+      let likeBttn = post.getElementsByTagName("li")[0]; 
+      // likeBttn: <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
       likeBttn.addEventListener("click", changeHeart);
     }
   )
 }
 
 /*
-  <footer>
-        <ul>
-          <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
-        </ul>
-      </footer>
+   likeBttn: <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
  */
 function changeHeart(event){
   let likeBttn = event.likeBttn;
-  let likeGlyph= likeBttn.getElementsByClassName("like-glyph")[0];
+  let spanTagWlikeGlyph= likeBttn.getElementsByTagName("span")[0];
   /**
       When a user clicks on an empty heart:
         Invoke mimicServerCall to simulate making a server request
@@ -37,11 +33,12 @@ function changeHeart(event){
             Change the heart to a full heart
             Add the .activated-heart class to make the heart appear red
    */  
-  if (likeGlyph.innerText==EMPTY_HEART){
+  if (spanTagWlikeGlyph.innerText==EMPTY_HEART){
     let responseAsPromise = mimicServerCall();
     responseAsPromise.then(
       (fulfilled, rejected)=> {
-
+        spanTagWlikeGlyph.innerText= FULL_HEART;
+        spanTagWlikeGlyph.setAttribute("class", "activated-heart");
       }
     ).catch(
       (rejected)=> {
@@ -58,10 +55,9 @@ function changeHeart(event){
 
             setTimeout(() => {
               errorModal.setAttribute("class", "hidden");
-            }, 300)
+            }, 300);
       }
     )
-    likeGlyph.innerText= FULL_HEART;
   } else {
       /**
         When a user clicks on a full heart:
@@ -69,7 +65,9 @@ function changeHeart(event){
           Remove the .activated-heart class
    */
 
-    likeGlyph.innerText= EMPTY_HEART;
+        spanTagWlikeGlyph.innerText= EMPTY_HEART;
+        spanTagWlikeGlyph.setAttribute("class", "like-glyph");
+
   }
 }
 
