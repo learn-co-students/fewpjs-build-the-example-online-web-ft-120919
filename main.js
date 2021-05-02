@@ -11,20 +11,18 @@ function init(){
 
   // attach ids to the likes & then attach action listeners
   let posts = document.getElementsByClassName("media-post");
-  posts.forEach(
-    (post)=>{
+  for (let post of posts){
       let likeBttn = post.getElementsByTagName("li")[0]; 
       // likeBttn: <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
       likeBttn.addEventListener("click", changeHeart);
     }
-  )
 }
 
 /*
    likeBttn: <li class="like">Like! <span class="like-glyph">&#x2661;</span></li>
  */
 function changeHeart(event){
-  let likeBttn = event.likeBttn;
+  let likeBttn = event.target;
   let spanTagWlikeGlyph= likeBttn.getElementsByTagName("span")[0];
   /**
       When a user clicks on an empty heart:
@@ -40,14 +38,14 @@ function changeHeart(event){
         spanTagWlikeGlyph.innerText= FULL_HEART;
         spanTagWlikeGlyph.setAttribute("class", "activated-heart");
       }
-    ).catch(
-      (rejected)=> {
-     /**        
-       When the "server" returns a failure status:
-              Respond to the error using a .catch(() => {}) block after your .then(() => {}) block.
-              Display the error modal by removing the .hidden class
-              Display the server error message in the modal
-              Use setTimeout to hide the modal after 3 seconds (add the .hidden class) */
+      ).catch(
+        (rejected)=> {
+        /**        
+        When the "server" returns a failure status:
+            Respond to the error using a .catch(() => {}) block after your .then(() => {}) block.
+            Display the error modal by removing the .hidden class
+            Display the server error message in the modal
+            Use setTimeout to hide the modal after 3 seconds (add the .hidden class) */
             let errorModal = document.getElementById("modal");
             errorModal.removeAttribute("class");
             let errorModalMessage = document.getElementById("modal-message");
@@ -59,10 +57,10 @@ function changeHeart(event){
       }
     )
   } else {
-      /**
-        When a user clicks on a full heart:
-          Change the heart back to an empty heart
-          Remove the .activated-heart class
+   /**
+      When a user clicks on a full heart:
+        Change the heart back to an empty heart
+        Remove the .activated-heart class
    */
 
         spanTagWlikeGlyph.innerText= EMPTY_HEART;
